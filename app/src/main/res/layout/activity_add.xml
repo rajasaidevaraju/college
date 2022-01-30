@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddActivity"
+
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/classNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/classNameInputLabel"
+            android:ems="10"
+            android:hint="@string/classNameInputLabel"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:padding="15dp"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/professorNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/professorNameInputLabel"
+            android:ems="10"
+            android:hint="@string/professorNameInputLabel"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:padding="15dp"
+            tools:ignore="TextContrastCheck" />
+
+        <Spinner
+            android:id="@+id/daySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/daysSpinnerLabel"
+            tools:ignore="TouchTargetSizeCheck"
+            android:layout_marginTop="15dp"
+
+            android:layout_marginBottom="15dp"/>
+</LinearLayout>
