@@ -3,14 +3,7 @@
     <string name="add">Create new schedule</string>
     <string name="classNameInputLabel">Enter Class Name</string>
     <string name="professorNameInputLabel">Enter Professor Name</string>
+    <string name="classIdInputLabel">Enter Class ID</string>
     <string name="daysSpinnerLabel">Select day of week</string>
-    <string-array name="daysArray">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
-    </string-array>
+    <string name="addClassButtonLabel">Create Class</string>
 </resources>
