@@ -6,4 +6,6 @@
     <string name="classIdInputLabel">Enter Class ID</string>
     <string name="daysSpinnerLabel">Select day of week</string>
     <string name="addClassButtonLabel">Create Class</string>
+    <string name="random">random text</string>
+    <string name="textSize">17sp</string>
 </resources>

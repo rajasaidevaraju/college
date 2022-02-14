@@ -11,9 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.College">
         <activity
+            android:label="Add New Class"
             android:name=".AddActivity"
             android:exported="true" />
         <activity
+            android:label="Loyalist College"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

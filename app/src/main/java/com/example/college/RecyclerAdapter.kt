@@ -1,14 +1,21 @@
 package com.example.college
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.college.data.ClassData
+import com.example.college.data.Days
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RecyclerAdapter(private val mList: List<ClassData>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
+    var onItemClick: ((String) -> Unit)? = null
+    lateinit var onLongItemClick: ((String) -> Boolean)
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
@@ -23,8 +30,18 @@ class RecyclerAdapter(private val mList: List<ClassData>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val ClassData = mList[position]
+
+        val s = "${ClassData.hours}:${ClassData.minutes}"
+        val f1: DateFormat = SimpleDateFormat("HH:mm")
+        val d: Date = f1.parse(s)
+        val f2: DateFormat = SimpleDateFormat("h:mm a")
+
         // sets the text to the textview from our itemHolder class
-        holder.textView.text = ClassData.className
+        holder.classNameText.text = ClassData.className
+        holder.professorNameText.text = ClassData.professorName
+        holder.classIdText.text = ClassData.classId
+        holder.dayText.text=Days.getDayForID(ClassData.day)
+        holder.timeText.text=f2.format(d).uppercase()
 
     }
 
@@ -33,8 +50,20 @@ class RecyclerAdapter(private val mList: List<ClassData>) : RecyclerView.Adapter
         return mList.size
     }
 
-    // Holds the views for adding it to image and text
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val textView: TextView = itemView.findViewById(R.id.classNameText)
+    // Holds the views
+    inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+        val classNameText: TextView = itemView.findViewById(R.id.classNameText)
+        val professorNameText: TextView = itemView.findViewById(R.id.professorNameText)
+        val classIdText: TextView = itemView.findViewById(R.id.classIdText)
+        val dayText: TextView = itemView.findViewById(R.id.dayText)
+        val timeText: TextView = itemView.findViewById(R.id.timeText)
+        init{
+            ItemView.setOnClickListener{
+                onItemClick?.invoke(mList[adapterPosition].classId)
+            }
+            ItemView.setOnLongClickListener {
+                onLongItemClick.invoke(mList[adapterPosition].classId)
+            }
+        }
     }
 }
