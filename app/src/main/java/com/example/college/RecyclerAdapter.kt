@@ -31,17 +31,12 @@ class RecyclerAdapter(private val mList: List<ClassData>) : RecyclerView.Adapter
 
         val ClassData = mList[position]
 
-        val s = "${ClassData.hours}:${ClassData.minutes}"
-        val f1: DateFormat = SimpleDateFormat("HH:mm")
-        val d: Date = f1.parse(s)
-        val f2: DateFormat = SimpleDateFormat("h:mm a")
-
         // sets the text to the textview from our itemHolder class
         holder.classNameText.text = ClassData.className
         holder.professorNameText.text = ClassData.professorName
         holder.classIdText.text = ClassData.classId
         holder.dayText.text=Days.getDayForID(ClassData.day)
-        holder.timeText.text=f2.format(d).uppercase()
+        holder.timeText.text=Days.getTime(ClassData.hours,ClassData.minutes)
 
     }
 

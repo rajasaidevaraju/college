@@ -14,7 +14,7 @@ import com.google.gson.Gson
 
 class AddActivity : AppCompatActivity() {
 
-    var utils: util =util(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
@@ -31,6 +31,7 @@ class AddActivity : AppCompatActivity() {
     }
 
     private fun checkForUpdate(){
+        var utils: util =util(this.getSharedPreferences("classData", AppCompatActivity.MODE_PRIVATE))
         val extras=intent.extras
         if(extras!=null){
             val classId=extras.getString("classId")
@@ -92,7 +93,7 @@ class AddActivity : AppCompatActivity() {
     }
 
     fun addClass(view:View){
-
+        var utils: util =util(this.getSharedPreferences("classData", AppCompatActivity.MODE_PRIVATE))
         var classData=getClassData()
         var validInput=inputCheck(classData)
         if(validInput){

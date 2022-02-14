@@ -8,4 +8,8 @@
     <string name="addClassButtonLabel">Create Class</string>
     <string name="random">random text</string>
     <string name="textSize">17sp</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">View Class Data in Widget</string>
 </resources>

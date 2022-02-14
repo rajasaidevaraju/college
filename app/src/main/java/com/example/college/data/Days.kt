@@ -1,5 +1,11 @@
 package com.example.college.data
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
+
 class Days constructor(id: Int,name: String){
     private var id: Int = 0
     private var name: String = "Monday"
@@ -15,15 +21,15 @@ class Days constructor(id: Int,name: String){
         return id
     }
 
-    fun setId(id: Int) {
+    private fun setId(id: Int) {
         this.id = id
     }
 
-    fun getName(): String {
+    private fun getName(): String {
         return name
     }
 
-    fun setName(name: String) {
+    private fun setName(name: String) {
         this.name = name
     }
 
@@ -33,13 +39,20 @@ class Days constructor(id: Int,name: String){
         return name
     }
 
-    override fun equals(obj: Any?): Boolean {
-        if (obj is Days) {
-            val c: Days = obj as Days
-            if (c.getName() == name && c.getId() === id) return true
+    override fun equals(other: Any?): Boolean {
+        if (other is Days) {
+            val c: Days = other
+            if (c.getName() == name && c.getId() == id) return true
         }
         return false
     }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + name.hashCode()
+        return result
+    }
+
     companion object{
         fun getDays():MutableList<Days>{
             val daysList: MutableList<Days> = ArrayList()
@@ -51,7 +64,7 @@ class Days constructor(id: Int,name: String){
             daysList.add(Days(5,"Saturday"))
             daysList.add(Days(6,"Sunday"))
 
-            return daysList;
+            return daysList
         }
         fun getDayForID(id:Int):String{
             var returnVal="Monday"
@@ -66,9 +79,19 @@ class Days constructor(id: Int,name: String){
             }
             return returnVal
         }
+
+        fun getCurrentDay():Int{
+            return LocalDate.now().dayOfWeek.value-1
+        }
+        fun getCurrentHour():Int{
+            return Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        }
+        fun getTime(hours:Int,minutes:Int):String{
+            val s = "${hours}:${minutes}"
+            val f1: DateFormat = SimpleDateFormat("HH:mm")
+            val d: Date = f1.parse(s)
+            val f2: DateFormat = SimpleDateFormat("h:mm a")
+            return f2.format(d).uppercase()
+        }
     }
-}
-
-class DaysList{
-
 }

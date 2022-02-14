@@ -10,9 +10,9 @@ import com.example.college.MainActivity
 import com.example.college.RecyclerAdapter
 import com.google.gson.Gson
 
-class util(activity: Activity) {
+class util(mPrefs: SharedPreferences) {
 
-   val activity=activity
+   val mPrefs=mPrefs
     private val gson: Gson = Gson()
     fun jSONtoObj(value:String):ClassData{
         return gson.fromJson(value,ClassData::class.java)
@@ -21,7 +21,7 @@ class util(activity: Activity) {
         return gson.toJson(classData)
     }
     fun getAllClassData():List<ClassData>{
-        val mPrefs = activity.getSharedPreferences("classData", AppCompatActivity.MODE_PRIVATE)
+
         //val classListData= HashMap<String,ClassData>()
         var classListData= ArrayList<ClassData>()
         for((key,value) in  mPrefs.all){
@@ -34,7 +34,7 @@ class util(activity: Activity) {
     }
 
     fun getClassData(classId:String):ClassData?{
-        val mPrefs = activity.getSharedPreferences("classData", AppCompatActivity.MODE_PRIVATE)
+
         val classDataString=mPrefs.getString(classId,null)
         if (classDataString != null) {
             return jSONtoObj(classDataString)
@@ -43,7 +43,7 @@ class util(activity: Activity) {
     }
 
     fun insertNewData(classData:ClassData){
-        val mPrefs = activity.getSharedPreferences("classData", AppCompatActivity.MODE_PRIVATE)
+
         var json=ObjToJSON(classData)
         with (mPrefs.edit()) {
             putString(classData.classId,json)
@@ -51,7 +51,6 @@ class util(activity: Activity) {
         }
     }
     fun deleteData(classId:String,adapter:RecyclerAdapter){
-        val mPrefs = activity.getSharedPreferences("classData", AppCompatActivity.MODE_PRIVATE)
         with (mPrefs.edit()) {
             remove(classId)
             apply()
@@ -59,4 +58,19 @@ class util(activity: Activity) {
         }
     }
 
+    fun getLatestData():ClassData{
+        val listData=getAllClassData()
+        val currentDay=Days.getCurrentDay()
+        val currentHour=Days.getCurrentHour()
+        val current=currentDay*100+currentHour
+        var result= listData[0]
+        for(classData in listData){
+            val target=classData.day*100+classData.hours
+            if(current>target){
+                result=classData
+                break
+            }
+        }
+        return result
+    }
 }

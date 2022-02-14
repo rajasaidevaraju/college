@@ -16,7 +16,6 @@ import com.google.gson.Gson
 class MainActivity : AppCompatActivity() {
 
     private val gson:Gson=Gson()
-    var utils: util = util(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpView(){
+        var utils: util =util(this.getSharedPreferences("classData", AppCompatActivity.MODE_PRIVATE))
         // getting the recyclerview by its id
         val recyclerview = findViewById<RecyclerView>(R.id.classDataList)
 
