@@ -66,7 +66,7 @@ class util(mPrefs: SharedPreferences) {
         var result= listData[0]
         for(classData in listData){
             val target=classData.day*100+classData.hours
-            if(current>target){
+            if(current<target){
                 result=classData
                 break
             }
